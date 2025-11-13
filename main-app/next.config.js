@@ -1,33 +1,42 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Rewrites for all zones
   async rewrites() {
     return [
+      // Blog zone
       {
-        source: "/blog/:path*",
-        destination: "http://localhost:3001/:path*",
+        source: '/blog',
+        destination: 'http://localhost:3001/blog',
       },
       {
-        source: "/dashboard/:path*",
-        destination: "http://localhost:3002/:path*",
+        source: '/blog/:path*',
+        destination: 'http://localhost:3001/blog/:path*',
+      },
+      // Dashboard zone
+      {
+        source: '/dashboard',
+        destination: 'http://localhost:3002/dashboard',
       },
       {
-        // React app entry point and all nested paths
-        source: "/legacy/:path*",
-        destination: "http://localhost:3003/legacy/:path*",
+        source: '/dashboard/:path*',
+        destination: 'http://localhost:3002/dashboard/:path*',
+      },
+      // Legacy React app (not a zone)
+      {
+        source: '/legacy/:path*',
+        destination: 'http://localhost:3003/legacy/:path*',
       },
       {
-        // CRA assets served from root in dev
-        source: "/static/:path*",
-        destination: "http://localhost:3003/static/:path*",
+        source: '/static/:path*',
+        destination: 'http://localhost:3003/static/:path*',
       },
       {
-        // CRA manifest + favicon etc.
-        source: "/manifest.json",
-        destination: "http://localhost:3003/manifest.json",
+        source: '/manifest.json',
+        destination: 'http://localhost:3003/manifest.json',
       },
       {
-        source: "/favicon.ico",
-        destination: "http://localhost:3003/favicon.ico",
+        source: '/favicon.ico',
+        destination: 'http://localhost:3003/favicon.ico',
       },
     ];
   },
